@@ -350,13 +350,12 @@
                         
                         
                         function eventCallback(response) {
-                          var daveResponse = response[0];
-                          if ('error' in response[0]) {
-                            alert('Something went wrong' + response[0]['error']);
-                            return;
-                          }
-                          
-                          var events = response[0]['events'];
+			for(var cal = 0; cal < response.length; ++cal) {
+				if ('error' in response[cal]) {
+					alert('Something went wrong ' + response[cal]['error']);
+					return;
+				}
+				var events = response[cal]['events'];
                           
                           var output = "";
                           for(var i = 0; i < events.length; ++i) {
