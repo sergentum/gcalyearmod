@@ -3,7 +3,7 @@
 height="26"
 title="__MSG_Labs_Gadget_Year_View_Title__"
 description="__MSG_Labs_Gadget_Year_View_Description__"
-author="sergentum!!"
+author="sergentum321"
 author_email="sergentums@gmail.com">
 <Require feature="views" />
 <Require feature="google.calendar-0.5" />
@@ -247,24 +247,24 @@ author_email="sergentums@gmail.com">
                           }
                           out.push('</table>');
                         document.getElementById('calDiv').innerHTML = out.join('');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+				month = 1;
+				getMonthEvents();
+		}
+		var month = 1;
+		function getMonthEvents() {
+			if(month <= 12) {
+				year = currentYear;
+				nxtMonth = parseInt(month)+1;
+				nxtYear = year;
+				if(nxtMonth > 12) {
+					nxtMonth = 1;
+					nxtYear = parseInt(year)+1;
+				}
+				startDate = {year: year, month: month, date: 1, hour: 0, minute: 0, second: 0};
+				endDate = {year: nxtYear, month: nxtMonth, date: 1, hour: 0, minute: 0, second: 0};
+				google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
+				month = parseInt(month)+1;
+			}
                         }
                         // Setup the style + buttons
                         var DARK_BLUE = '#112aba';
@@ -288,14 +288,14 @@ author_email="sergentums@gmail.com">
                           'td.normal {background-color:', WHITE, '}',
                           'td.weekend {background-color:', WEEKEND, '}',
                           'td.outer {padding-right: 4px; padding-bottom: 4px; }',
-                          'td.dow {border-width: 0 0 1px 0; border-style:solid;',
+                          'td.dow {max-width: 5px; border-width: 0 0 1px 0; border-style:solid;',
                           'border-color: ', DIVIDER, '}',
                           'td.today {padding: 1px 3px !important; background-color:', TODAY,
                           ';color:#fff !important; border-width: 1px; border-style:solid;',
                           'border-color: ', TODAY_BORDER_DARK, ' ', TODAY_BORDER_LIGHT, ' ',
                           TODAY_BORDER_LIGHT, ' ', TODAY_BORDER_DARK, '}',
                           'td.monthHeader {font-weight:bold}',
-                          '.month {background-color:', LIGHT_BLUE,
+                          '.month {table-layout: fixed; width: 100%; background-color:', LIGHT_BLUE,
                           ';border: 1px solid ', BORDER_GREY, '}',
                           'body, td {font-family:Arial;font-size: 12.8px}',
                           'body {margin-left:10px; background-color:', WHITE, '}',
@@ -318,24 +318,20 @@ author_email="sergentums@gmail.com">
 
                           nxtMonth = month +1;
                           nxtYear = year;
+
                           if(nxtMonth > 12) {
                             nxtMonth = 1;
                             nxtYear = year + 1;
                           }
+
+
+
                           startDate = {year: year, month: month, date: 1, hour: 0, minute: 0, second: 0};
-
-
-
-
-
-
                           endDate = {year: nxtYear, month: nxtYear, date: 1, hour: 0, minute: 0, second: 0};
                           google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
                         }
 
-
 		function eventCallback(response) {
-
 			for(var cal = 0; cal < response.length; ++cal) {
 				if ('error' in response[cal]) {
 					alert('Something went wrong ' + response[cal]['error']);
@@ -346,9 +342,6 @@ author_email="sergentums@gmail.com">
 				for(var i = 0; i < events.length; ++i) {
 					var e = events[i];
 					if ('title' in e) {
-
-
-
 						var startDate = new Date(e.startTime.year, (e.startTime.month-1), e.startTime.date);
 						var endDate = new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date);
 						var currentDate = startDate;//new Date(startDate.getTime());
