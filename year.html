@@ -3,7 +3,7 @@
 height="26"
 title="__MSG_Labs_Gadget_Year_View_Title__"
 description="__MSG_Labs_Gadget_Year_View_Description__"
-author="sergentum321"
+author="sergentum"
 author_email="sergentums@gmail.com">
 <Require feature="views" />
 <Require feature="google.calendar-0.5" />
@@ -210,13 +210,13 @@ author_email="sergentums@gmail.com">
                                     out.push(c);
                                     if (d >= 1 && d <= daysInMonth) {
                                     out.push(' clickable" onclick="showDate(', y, ',', m+1, ',', d,
-                                    ')">', d);
-                                    } else {
-                                    out.push('">&nbsp;');
-                                    }
-
-
-
+                                    //')">', d);
+                                    //} else {
+                                    //out.push('">&nbsp;');
+                                    //}
+								')">', d, '</td>');
+							out.push('</tr>');
+						i++;
                                   }
                                   //var output = "month: "+(m+1)+" ";
                                   //for(x in monthEvents) {
@@ -311,26 +311,21 @@ author_email="sergentums@gmail.com">
                         var tentativeYear = gadgets.views.getParams()['year'];
                         displayCurrentYear(tentativeYear);
                         // This is here to make it look nicer for gmail
-                        gadgets.window.adjustHeight(600);
-                        for(i=1; i<=12; i++ ) {
-                          year = tentativeYear;
-                          month = i;
+                        gadgets.window.adjustHeight(2600);
+                        //for(i=1; i<=12; i++ ) {
+                          //year = tentativeYear;
+                          //month = i;
+                          //nxtMonth = month +1;
+                          //nxtYear = year;
+                          //if(nxtMonth > 12) {
+                           // nxtMonth = 1;
+                           // nxtYear = year + 1;
 
-                          nxtMonth = month +1;
-                          nxtYear = year;
-
-                          if(nxtMonth > 12) {
-                            nxtMonth = 1;
-                            nxtYear = year + 1;
-                          }
-
-
-
-                          startDate = {year: year, month: month, date: 1, hour: 0, minute: 0, second: 0};
-                          endDate = {year: nxtYear, month: nxtYear, date: 1, hour: 0, minute: 0, second: 0};
-                          google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
-                        }
-
+                          //}
+                         // startDate = {year: year, month: month, date: 1, hour: 0, minute: 0, second: 0};
+                         // endDate = {year: nxtYear, month: nxtYear, date: 1, hour: 0, minute: 0, second: 0};
+                         // google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
+                        //}
 		function eventCallback(response) {
 			for(var cal = 0; cal < response.length; ++cal) {
 				if ('error' in response[cal]) {
