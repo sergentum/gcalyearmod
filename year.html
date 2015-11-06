@@ -50,9 +50,10 @@
                  ]]>
                </Content>
   <Content type="html" view="canvas">
-    <![CDATA[
+<!--     <![CDATA[ -->
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
             <html>
+              <body>
               <body>
                 
                 <form style="margin:8px 0; display:block" onsubmit="return display(0);">
@@ -351,11 +352,11 @@
                         
                         function eventCallback(response) {
                           var daveResponse = response[0];
-
                           if ('error' in response[0]) {
                             alert('Something went wrong' + response[0]['error']);
                             return;
                           }
+                          
                           var events = response[0]['events'];
                           
                           var output = "";
