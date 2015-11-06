@@ -2,8 +2,9 @@
 <ModulePrefs
 height="26"
 title=" Year with events desc"
+
 description="__MSG_Labs_Gadget_Year_View_Description__"
-author="sergentum451"
+author="sergentum454"
 author_email="sergentums@gmail.com">
 <Require feature="views" />
 <Require feature="google.calendar-0.5" />
@@ -242,8 +243,8 @@ author_email="sergentums@gmail.com">
                         var out = ['<table>'];
                           var weeks = 0;
                           for (var m = 0; m < 12; ++m) {
-                          // Every 6 months, we start a new row.
-                          if (m % 6 == 0) {
+                          // Every 3 months, we start a new row.
+                          if (m % 3 == 0) {
                           out.push('<tr>');
                           // Calculate the maximum number of weeks for the months in this row.
                           weeks = Math.max(getWeeksInMonth(y, m), getWeeksInMonth(y, m+1),
@@ -359,8 +360,8 @@ author_email="sergentums@gmail.com">
 								continue;
 							}
 							document.getElementById(id).className += " busy ";
-							document.getElementById(id).title += e.title + " " + e.startTime.date + " " + e.endTime.date+ "; \n";
-							document.getElementById(id).innerText += "\n" + e.title.substr(0,14);
+							document.getElementById(id).title += e.title + "\n";
+							document.getElementById(id).textContent += ": " + e.title.substr(0,21);
 							currentDate.setDate(currentDate.getDate() + 1);
 						}
 					}
