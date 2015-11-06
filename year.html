@@ -3,8 +3,8 @@
 height="26"
 title="__MSG_Labs_Gadget_Year_View_Title__"
 description="__MSG_Labs_Gadget_Year_View_Description__"
-author="Grzegorz Pawlik (based on Google code: http://www.google.com/ig/modules/calendar/year/year.xml"
-author_email="gzesiek(a)poczta.fm">
+author="sergentum!!"
+author_email="sergentums@gmail.com">
 <Require feature="views" />
 <Require feature="google.calendar-0.5" />
 <Require feature="google.calendar-0.5.read" />
@@ -264,8 +264,8 @@ author_email="gzesiek(a)poczta.fm">
 
 
 
-                        }
 
+                        }
                         // Setup the style + buttons
                         var DARK_BLUE = '#112aba';
                         var LIGHT_BLUE = '#e8eef7';
@@ -334,40 +334,40 @@ author_email="gzesiek(a)poczta.fm">
                         }
 
 
-                        function eventCallback(response) {
-                          var daveResponse = response[0];
+		function eventCallback(response) {
 
-                          if ('error' in response[0]) {
-                            alert('Something went wrong' + response[0]['error']);
-                            return;
-                          }
-                          var events = response[0]['events'];
-                          var output = "";
-                          for(var i = 0; i < events.length; ++i) {
-                            var e = events[i];
-                            if ('title' in e) {
-                            for(j= e.startTime.date; j<=e.endTime.date; j++) {
-                              id = e.startTime.year + "-" +e.startTime.month + "-" +  j;
-                              if( j == e.endTime.date && e.allDay == true ) {
+			for(var cal = 0; cal < response.length; ++cal) {
+				if ('error' in response[cal]) {
+					alert('Something went wrong ' + response[cal]['error']);
+					return;
+				}
+				var events = response[cal]['events'];
+				var output = "";
+				for(var i = 0; i < events.length; ++i) {
+					var e = events[i];
+					if ('title' in e) {
 
 
 
-
-
-
-
-
-                                continue;
-                              }
-                              document.getElementById(id).className += " busy ";
-                              document.getElementById(id).title += e.title + " " + e.startTime.date + " " + e.endTime.date+ "; \n";
-
-
-
-                            }
-                            }
-                          }
-
+						var startDate = new Date(e.startTime.year, (e.startTime.month-1), e.startTime.date);
+						var endDate = new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date);
+						var currentDate = startDate;//new Date(startDate.getTime());
+						while(currentDate.getTime() <= endDate.getTime()) {
+							id = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate();
+							// prevent double entries
+							if((currentDate.getDate() == endDate.getDate() && e.allDay == true) || (currentDate.getMonth() + 2) != month) {
+								currentDate.setDate(currentDate.getDate() + 1);
+								continue;
+							}
+							document.getElementById(id).className += " busy ";
+							document.getElementById(id).title += e.title + " " + e.startTime.date + " " + e.endTime.date+ "; \n";
+							document.getElementById(id).innerText += "\n" + e.title.substr(0,14);
+							currentDate.setDate(currentDate.getDate() + 1);
+						}
+					}
+				}
+			}
+			getMonthEvents();
                         }
                       </script>
                     </body>
