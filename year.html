@@ -359,6 +359,7 @@ author_email="sergentums@gmail.com">
 								continue;
 							}
 							document.getElementById(id).className += " busy ";
+							document.getElementById(id).style.color = e.palette.medium;
 							document.getElementById(id).title += e.title + "\n";
 							document.getElementById(id).textContent += ": " + e.title.substr(0,21);
 							currentDate.setDate(currentDate.getDate() + 1);
